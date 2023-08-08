@@ -16,3 +16,18 @@ exports.updateUserValidation = [
   body('email').notEmpty().withMessage('Email is Required'),
   validFields,
 ];
+
+exports.CreateValidation = [
+  body('name').notEmpty().withMessage('Name is Requered'),
+  body('email')
+    .notEmpty()
+    .withMessage('Email is requered')
+    .isEmail()
+    .withMessage('email must be a correct format'),
+  body('currentPassword')
+    .isLength({ min: 8 })
+    .withMessage('Password must have a least 8 characters')
+    .matches(/[a-zA-Z]/)
+    .withMessage('Password must have cotain a least one letter'),
+  validFields,
+];

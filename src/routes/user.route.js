@@ -5,7 +5,7 @@ const userMiddleware = require('./../middlewares/user.middleware');
 const validationMiddleware = require('./../middlewares/validation.middelware.');
 router
   .get('/', userController.findAllUser)
-  .post('/', userController.createUser);
+  .post('/', validationMiddleware.CreateValidation, userController.createUser);
 router
   .use('/:id', userMiddleware.validUser)
   .route('/:id')
