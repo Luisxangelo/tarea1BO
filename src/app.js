@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const userRoutes = require('./routes/user.route');
 const dateRoutes = require('./routes/repair.route');
 const authRoutes = require('./routes/authroute');
+const globalErrorHander = require('./controllers/error.controller');
 const hpp = require('hpp');
 const helmet = require('helmet');
 
@@ -19,5 +20,7 @@ app.use(morgan('dev'));
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/repairs', dateRoutes);
 app.use('/api/v1/login', authRoutes);
+
+app.use(globalErrorHander);
 
 module.exports = app;
