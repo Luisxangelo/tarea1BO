@@ -4,20 +4,25 @@ const userController = require('./../controllers/user.controller');
 const userMiddleware = require('./../middlewares/user.middleware');
 const validationMiddleware = require('./../middlewares/validation.middelware.');
 const authController = require('../controllers/auth.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 router.post(
   '/login',
   validationMiddleware.loginUserValidation,
   authController.signIn
 );
+router.post(
+  '/singUp',
+  validationMiddleware.loginUserValidation,
+  authController.singUp
+);
 
-router
-  .get('/', userController.findAllUser)
-  .post(
-    '/',
-    validationMiddleware.userCreateValidation,
-    userController.createUser
-  );
+router.use(authMiddleware.protect);
+router.post(
+  '/',
+  validationMiddleware.userCreateValidation,
+  userController.createUser
+);
 router
   .use('/:id', userMiddleware.validUser)
   .route('/:id')

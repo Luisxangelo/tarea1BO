@@ -11,6 +11,7 @@ router.post(
   dateController.createDate
 );
 router.use(authMiddleware.restrictTo('employee'));
+
 router
   .get('/', dateController.findAllRepair)
   .use('/:id', dateMiddleware.validRepair)
